@@ -1,7 +1,25 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Sketch extends PApplet {
 	
+  //imgae declaration
+  PImage imgBackground;
+  PImage imgWallet;
+
+
+  float fltWalletx = 300;
+  float fltWallety = 20;
+  float fltWalletSpeedx = 1;
+  float fltWalletSpeedy = 1;
+
+  float fltCircleX = 20;
+  float fltCircley = 100;
+  float fltCircleSpeedX = 2;
+  float fltCircleSpeedY = 2;
+
+
+
 	
   /**
    * Called once at the beginning of execution, put your size all in this method
@@ -16,20 +34,36 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    background(210, 255, 173);
+    imgBackground = loadImage("background.jpeg");
+    
+    imgWallet = loadImage("wallet.png");
+
+    imgWallet.resize(50, 50);
+
   }
 
   /**
    * Called repeatedly, anything drawn to the screen goes here
    */
   public void draw() {
-	  
-	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
 
-    stroke(255);
-    line(50, 125, 70, 50);  
+    image(imgBackground, 0, -100);
+	  
+  
+    image(imgWallet, fltWalletx, fltWallety);
+    fltWallety += fltWalletSpeedy;
+    fltWalletx += fltWalletSpeedx;
+
+    if (fltWalletx < 0 + 3 || fltWalletx > width - 45) {
+      fltWalletSpeedx *= -1;
+    }
+
+    if (fltWallety < 0 + 3 || fltWallety > height - 50) {
+      fltWalletSpeedy *= -1;
+    }
+
+
+
   }
   
   // define other methods down here.
